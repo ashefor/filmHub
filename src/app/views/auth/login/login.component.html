@@ -1,0 +1,31 @@
+<div id="logreg-forms">
+        <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
+            <h1 class="h3 mb-2 font-weight-normal"> Sign In</h1>
+            <input type="email" id="inputEmail" class="form-control mb-3" placeholder="Email address" formControlName="username">
+            <div class="password-area">
+                <input type="password" id="inputPassword" class="form-control" placeholder="Password"
+                    formControlName="password" [type]="hide? 'password': 'text'">
+                <a role="button" (click)="togglePwd()">
+                    <i class="{{hide ? 'fa fa-eye-slash' : 'fa fa-eye'}}"></i>
+                </a>
+            </div>
+            <button class="btn btn-success btn-block" type="submit"><i class="fa fa-sign-in"></i> Sign in <span
+                    *ngIf="loading"><i class="fa fa-spin fa-spinner"></i></span> </button>
+            <div class="d-flex mt-2">
+                <div class="form-check mr-auto">
+                    <input type="checkbox" (change)="keepLoggedIn($event)" formControlName="checked"
+                        class="form-check-input" id="exampleCheck1">
+                    <label class="form-check-label" for="exampleCheck1">Remember me</label>
+                </div>
+                <a [routerLink]="['/auth/reset-password']" id="forgot_pswd">Forgot password?</a>
+            </div>
+            <hr>
+            <!-- Don't have an account! -->
+            <div class="text-center">
+                <span>
+                    Don't have an account? <a [routerLink]="['/auth/register']">Create one now</a>
+                </span>
+            </div>
+        </form>
+    
+    </div>
