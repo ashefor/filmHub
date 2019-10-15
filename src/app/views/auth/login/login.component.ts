@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   hide = true;
+  loading: boolean = false;
   loginForm: FormGroup;
   checked: boolean = false;
   constructor(private formbuilder: FormBuilder, private authservice: AuthService) { }

@@ -8,7 +8,8 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  registerForm: FormGroup
+  registerForm: FormGroup;
+  loading: boolean = false;
   constructor(private formbuilder: FormBuilder, private authservice: AuthService) { }
 
   ngOnInit() {
