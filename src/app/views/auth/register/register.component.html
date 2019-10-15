@@ -1,9 +1,6 @@
 <div id="logreg-forms">
         <form action="/signup/" class="form-signup" [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
             <h1 class="h3 mb-3 font-weight-normal"> Register</h1>
-    
-            <input type="text" id="user-fullname" class="form-control mb-2" placeholder="Full name" formControlName="name"
-                required>
             <input type="email" id="user-email" class="form-control mb-2" placeholder="Email address"
                 formControlName="email" required>
             <input type="text" id="user-name" class="form-control mb-2" placeholder="choose a username"

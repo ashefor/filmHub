@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ export class LoginComponent implements OnInit {
   hide = true;
   loginForm: FormGroup;
   checked: boolean = false;
-  constructor(private formbuilder: FormBuilder) { }
+  constructor(private formbuilder: FormBuilder, private authservice: AuthService) { }
 
   ngOnInit() {
     this.initialiseForm()
@@ -23,7 +24,10 @@ export class LoginComponent implements OnInit {
       checked: [this.checked]
     })
   }
-
+  login(formValues){
+    console.log(formValues.username, formValues.password)
+    this.authservice.signIn(formValues.username, formValues.password)
+  }
   keepLoggedIn(e) {
     this.checked = e.target.checked
   }

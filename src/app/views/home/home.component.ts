@@ -1,15 +1,17 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { MoviesService } from 'src/app/services/movies.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private movieservice: MoviesService) { }
 
   ngOnInit() {
+    this.movieservice.getAllMovies().subscribe(value=>console.log(value))
   }
   slides = [
     { img: "http://placehold.it/350x150/000000" },
@@ -25,8 +27,7 @@ export class HomeComponent implements OnInit {
   slideConfig = {
     "slidesToShow": 4,
     "slidesToScroll": 4,
-    "nextArrow": `<div class='nav-btn next-slide' style="height: 47px; position: absolute; width: 26px; cursor: pointer;
-    top: 50%" (click)="toggleInfinite()"></div>`,
+    "nextArrow": `<div class='nav-btn next-slide'></div>`,
     "prevArrow": "<div class='nav-btn prev-slide'></div>",
     "dots": false,
     // "centerPadding": '60px',
