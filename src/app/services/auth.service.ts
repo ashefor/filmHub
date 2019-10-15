@@ -46,8 +46,9 @@ export class AuthService {
     })
   }
   signOut() {
+    localStorage.clear();
     return this.auth.auth.signOut().then(()=>
-      this.router.navigate(['/auth/login']),
+    this.router.navigate(['/auth/login']),
       this.user = null
     )
   }

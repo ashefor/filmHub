@@ -1,42 +1,75 @@
 /* You can add global styles to this file, and also import other style files */
+body{
+  background: #000 !important;
+}
+
 .slick-slider {
-    width: 90%;
+    width: calc(100% - 50px - 50px);
     margin: auto;
     background: #000;
-  }
+}
+// .slide{
+//   cursor: pointer;
+
+//   img{
+//     padding: 5px
+//   }
+
+//   &:hover{
+//     transform: scale(1.5);
+//     img{
+//       // padding: 50px
+//     }
+//   }
+// }
+// .slide{
+//   transition: transform .2s;
+//   margin: 0 auto !important;
+
+//     &:hover {
+//     -ms-transform: scale(1.5); /* IE 9 */
+//     -webkit-transform: scale(1.5); /* Safari 3-8 */
+//     transform: scale(1.5); 
+//   }
+// }
+.f-50{
+  font-size: 50px !important;
+  // color: #e5e5e5;
+}
+.nav-btn {
+  // height: 47px;
+  position: absolute;
+  // width: 26px;
+  cursor: pointer;
+  top: 100px
+}
    
-  .nav-btn {
-    height: 47px;
-    position: absolute;
-    width: 26px;
-    cursor: pointer;
-    top: 50% !important;
-  }
-   
-  .prev-slide.slick-disabled,
-  .next-slide.slick-disabled {
-    pointer-events: none;
-    opacity: 0.2;
-  }
-   
-  .prev-slide {
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-image: url('./assets/back.png');
-    left: -33px;
-  }
-   
-  .next-slide {
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-image: url('./assets/next.png');
-    right: -33px;
-  }
-   
-  .prev-slide:hover {
-    // background-position: 0px -53px;
-  }
-   
-  .next-slide:hover {
-    // background-position: -24px -53px;
-  }
+.prev-slide.slick-disabled,
+.next-slide.slick-disabled {
+  pointer-events: none;
+  opacity: 0.2;
+}
+  
+.prev-slide {
+  // background-repeat: no-repeat;
+  // background-size: contain;
+  // background-image: url('./assets/back.png');
+  left: -33px;
+  color: #e5e5e5
+}
+  
+.next-slide {
+  // background-repeat: no-repeat;
+  // background-size: contain;
+  // background-image: url('./assets/next.png');
+  right: -33px;
+  color: #e5e5e5;
+}
+  
+.prev-slide:hover {
+  // background-position: 0px -53px;
+}
+  
+.next-slide:hover {
+  // background-position: -24px -53px;
+}
