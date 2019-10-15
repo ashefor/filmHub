@@ -14,14 +14,16 @@ export class AppComponent implements OnInit {
 
   }
   ngOnInit(){
-    console.log('me')
-    this.movieservice.getMovie().subscribe(data=>console.log(data))
+    // console.log('me')
+    // this.movieservice.getMovie().subscribe(data=>console.log(data))
   }
   get isLoggedIn(){
     return this.authservice.isLoggedIn
   }
   logOut(){
-    this.authservice.signOut()
+    this.authservice.signOut().then(()=>{
+      console.log('loged out')
+    })
   }
   
 }

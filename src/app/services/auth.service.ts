@@ -46,8 +46,10 @@ export class AuthService {
     })
   }
   signOut() {
-    this.auth.auth.signOut();
-    this.user = null;
+    return this.auth.auth.signOut().then(()=>
+      this.router.navigate(['/auth/login']),
+      this.user = null
+    )
   }
   get isLoggedIn() {
     // return !!this.user

@@ -15,9 +15,9 @@
           <a class="nav-link" href="#">Pricing</a>
         </li>
       </ul>
-      <button *ngIf="!isLoggedIn" class="btn btn-primary">
+      <a role="button" [routerLink]="['/auth/login']" routerLinkActive="router-link-active"  *ngIf="!isLoggedIn" class="btn btn-primary">
         Login
-      </button>
+      </a>
       <button *ngIf="isLoggedIn" class="btn btn-secondary" (click)="logOut()">
           Logout
         </button>

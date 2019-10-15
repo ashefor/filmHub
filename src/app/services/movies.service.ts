@@ -13,10 +13,10 @@ export class MoviesService {
     return this.http.get('http://www.omdbapi.com/?apikey=8e507b1&t=blade+runner+2049&plot=full')
   }
 
-  // getAllMovies(){
-  //   return this.db.list('/allMovies/0').snapshotChanges()
-  // }
   getAllMovies(){
-    return this.db.object('/allMovies/0').valueChanges()
+    return this.db.list('/allMovies').valueChanges()
+  }
+  getSingleMovie(id){
+    return this.db.object(`/allMovies/${id}`).valueChanges()
   }
 }

@@ -1,17 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MoviesService } from 'src/app/services/movies.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
-
-  constructor(private movieservice: MoviesService) { }
+export class HomeComponent implements OnInit, OnDestroy {
+  user;
+  allDramas: any[] = [];
+  allComedies: any[] = [];
+  allActions: any[] = [];
+  allHorrors: any[] = [];
+  allAnimations: any[] = [];
+  subsciption: Subscription
+  constructor(private movieservice: MoviesService, private authservice: AuthService) { }
 
   ngOnInit() {
-    this.movieservice.getAllMovies().subscribe(value=>console.log(value))
+    if(this.authservice.isLoggedIn){
+      this.subsciption = this.movieservice.getAllMovies().subscribe(value => {
+        if(value){
+          console.log(value)
+        }
+      })
+    }
+  }
+  ngOnDestroy(){
+      this.subsciption.unsubscribe()
   }
   slides = [
     { img: "http://placehold.it/350x150/000000" },
@@ -30,33 +47,9 @@ export class HomeComponent implements OnInit {
     "nextArrow": `<div class='nav-btn next-slide'></div>`,
     "prevArrow": "<div class='nav-btn prev-slide'></div>",
     "dots": false,
-    // "centerPadding": '60px',
     "infinite": true
   };
-  addSlide() {
-    this.slides.push({ img: "http://placehold.it/350x150/777777" })
-  }
-
-  removeSlide() {
-    this.slides.length = this.slides.length - 1;
-  }
-
-  slickInit(e) {
-    console.log('slick initialized');
-  }
-
   breakpoint(e) {
     console.log('breakpoint');
-  }
-
-  afterChange(e) {
-    console.log(e)
-    console.log('afterChange');
-  }
-  toggleInfinite() {
-    console.log('haqq')
-  }
-  beforeChange(e) {
-    console.log('beforeChange');
   }
 }
