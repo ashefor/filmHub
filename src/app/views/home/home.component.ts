@@ -19,16 +19,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private movieservice: MoviesService, private authservice: AuthService) { }
 
   ngOnInit() {
-    if(this.authservice.isLoggedIn){
+    if (this.authservice.isLoggedIn) {
       this.subsciption = this.movieservice.getAllMovies().subscribe(value => {
-        if(value){
+        if (value) {
           console.log(value)
         }
       })
     }
   }
-  ngOnDestroy(){
-      this.subsciption.unsubscribe()
+  ngOnDestroy() {
+    this.subsciption.unsubscribe()
   }
   slides = [
     { img: "http://placehold.it/350x150/000000" },

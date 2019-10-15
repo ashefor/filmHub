@@ -52,7 +52,6 @@ export class AuthService {
     )
   }
   get isLoggedIn() {
-    // return !!this.user
     const user = JSON.parse(localStorage.getItem('user'));
     return user != null;
   }
