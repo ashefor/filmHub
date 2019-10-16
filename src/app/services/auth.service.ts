@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject, from } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -9,26 +9,35 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   user: firebase.User;
-  constructor(private auth: AngularFireAuth, private router: Router) { 
-    this.auth.authState.subscribe((user)=>{
-      if(user){
+  public currentUserSubject = new BehaviorSubject({})
+  currentUser = this.currentUserSubject.asObservable()
+  constructor(private auth: AngularFireAuth, private router: Router) {
+    this.currentUserSubject.next(JSON.parse(localStorage.getItem('user')))
+    this.auth.authState.subscribe((user) => {
+      if (user) {
         this.user = user
         console.log(this.user)
-        localStorage.setItem('user', JSON.stringify(this.user))
+        localStorage.setItem('user', JSON.stringify(this.user));
+        JSON.parse(localStorage.getItem('user'))
+        this.currentUserSubject.next(JSON.parse(localStorage.getItem('user')))
       }else{
-        localStorage.setItem('user', null)
+        localStorage.setItem('user', null);
+        JSON.parse(localStorage.getItem('user'))
+        this.currentUserSubject.next(JSON.parse(localStorage.getItem('user')))
       }
     })
   }
 
   signUp(username, email, password) {
     this.auth.auth.createUserWithEmailAndPassword(email, password).then((value) => {
-      if (value) {
-        if(value){
-          this.router.navigate(['/home'])
-        }
+      if (value){
         return value.user.updateProfile({
           displayName: username
+        }).then(()=>{
+          localStorage.setItem('user', JSON.stringify(value.user));
+          JSON.parse(localStorage.getItem('user'))
+          this.currentUserSubject.next(JSON.parse(localStorage.getItem('user')))
+          this.router.navigate(['/home'])
         })
       }
     }).catch((err: HttpErrorResponse) => {
@@ -38,22 +47,31 @@ export class AuthService {
 
   signIn(email, password) {
     this.auth.auth.signInWithEmailAndPassword(email, password).then((value) => {
-     if(value){
-       this.router.navigate(['/home'])
-     }
+      if (value) {
+        localStorage.setItem('user', JSON.stringify(value.user));
+        JSON.parse(localStorage.getItem('user'))
+        this.currentUserSubject.next(JSON.parse(localStorage.getItem('user')))
+        this.router.navigate(['/home'])
+      }
     }).catch((err) => {
       console.log(err.message)
     })
   }
-  signOut() {
-    localStorage.clear();
-    return this.auth.auth.signOut().then(()=>
-    this.router.navigate(['/auth/login']),
-      this.user = null
-    )
+
+  sendVerificationMail(){
+    this.auth.auth.currentUser.sendEmailVerification().then((data)=>{
+      this.router.navigate(['/auth/verify-email'])
+    })
   }
+  signOut() {
+    localStorage.clear()
+    this.auth.auth.signOut()
+    return this.router.navigate(['/auth/login'])
+  }
+
   get isLoggedIn() {
     const user = JSON.parse(localStorage.getItem('user'));
+    // return (user != null && user.emailVerified !== false) ? true: false;
     return user != null;
   }
 }

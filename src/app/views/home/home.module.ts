@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HomeComponent } from './home.component';
 import { RouterModule } from '@angular/router';
 import { SlickCarouselModule} from 'ngx-slick-carousel'
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 
 @NgModule({

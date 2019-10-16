@@ -4,7 +4,8 @@ import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
-import { ResetPasswordComponent } from './reset-password/reset-password.component'
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { VerifyEmailComponent } from './verify-email/verify-email.component'
 
 
 
@@ -12,7 +13,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
   declarations: [
     LoginComponent, 
     RegisterComponent, 
-    ResetPasswordComponent],
+    ResetPasswordComponent, VerifyEmailComponent],
   imports: [
     ReactiveFormsModule,
     CommonModule,

@@ -1,0 +1,30 @@
+.jumbotron{
+    height: 700px;
+}
+.bg-img{
+    height: 600px;
+    background-position: top center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.movieView{
+    display: flex;
+    padding: 0 50px;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+    .movieView-details{
+        width: 55%;
+    }
+    .movieView-img{
+        height: calc(100vh - 100px);
+        width: 45%;
+
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+}

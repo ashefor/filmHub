@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+<nav class="navbar navbar-dark navbar-expand-lg bg-black fixed-top">
     <a class="navbar-brand" href="#">Navbar w/ text</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -18,9 +18,14 @@
       <a role="button" [routerLink]="['/auth/login']" routerLinkActive="router-link-active"  *ngIf="!isLoggedIn" class="btn btn-primary">
         Login
       </a>
-      <button *ngIf="isLoggedIn" class="btn btn-secondary" (click)="logOut()">
+     <div *ngIf="isLoggedIn">
+       <span class="loggeduser navbar-text">  Welcome {{loggedInUser.displayName | titlecase}} </span>
+      <button class="btn btn-secondary" (click)="logOut()">
           Logout
         </button>
+     </div>
     </div>
   </nav>
-<router-outlet></router-outlet>
+<div style="margin-top: 55px">
+    <router-outlet></router-outlet>
+</div>
