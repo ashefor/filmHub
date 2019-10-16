@@ -2,16 +2,20 @@
     <form action="/signup/" class="form-signup" [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
         <h1 class="h3 mb-3 font-weight-normal"> Register</h1>
         <input type="email" id="user-email" class="form-control" placeholder="Email address" formControlName="email">
-        <small *ngIf="!validateEmail()" class="text-danger">
-            Please enter a valid email
-        </small>
+        <div class="form-control-feedback" *ngIf="email.errors && (email.dirty)">
+            <small *ngIf="email.errors.required" class="text-danger">Email is required</small>
+            <small *ngIf="email.errors.email" class="text-danger">Please enter a valid email</small>
+        </div>
         <input type="text" id="user-name" class="form-control mt-2" placeholder="choose a username"
             formControlName="username">
-        <small *ngIf="!validateUserName()" class="text-danger">
-            Please choose a username
-        </small>
+        <div class="form-control-feedback" *ngIf="username.errors && (username.dirty)">
+            <small *ngIf="username.errors.required" class="text-danger">Please choose a username</small>
+        </div>
         <input type="password" id="user-pass" (keyup)="clearpwdError($event)" class="form-control mt-2"
             placeholder="Password" formControlName="password">
+            <div class="form-control-feedback" *ngIf="password.errors && (password.dirty)">
+                    <small *ngIf="password.errors.required" class="text-danger">Please enter a password</small>
+                </div>
         <input type="password" id="user-repeatpass" (keyup)="clearpwdError($event)" class="form-control mt-2"
             placeholder="Repeat Password" formControlName="confirmPassword">
         <small class="text-danger" *ngIf="diffpasswords">

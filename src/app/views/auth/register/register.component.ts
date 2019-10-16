@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -11,22 +11,22 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   loading: boolean = false;
   diffpasswords: boolean = false;
+  psswd;
   constructor(private formbuilder: FormBuilder, private authservice: AuthService) { }
 
   ngOnInit() {
-    this.initialiseForm()
+    this.initialiseForm();
   }
 
   initialiseForm() {
     this.registerForm = this.formbuilder.group({
       username: ['', Validators.required],
-      email: ['', Validators.required],
-      password: ['', Validators.compose([Validators.required])],
-      confirmPassword: ['', Validators.compose([Validators.required])],
+      email: ['', Validators.compose([Validators.required, Validators.email])],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
       // checked: ['', Validators.required]
     })
   }
-
   register(formValues) {
     if (this.registerForm && this.registerForm.valid) {
       const pwd1 = this.registerForm.get('password').value
@@ -45,13 +45,14 @@ export class RegisterComponent implements OnInit {
       this.diffpasswords = false
     }
   }
-
-  validateUserName() {
-    return this.registerForm.get('username').valid || this.registerForm.get('username').untouched
+  get email(){
+    return this.registerForm.get('email')
   }
-
-  validateEmail() {
-    return this.registerForm.get('email').valid || this.registerForm.get('email').untouched
+  get username(){
+    return this.registerForm.get('username')
+  }
+  get password(){
+    return this.registerForm.get('password')
   }
 
 }
