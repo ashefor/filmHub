@@ -1,13 +1,20 @@
 <div id="logreg-forms">
         <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
             <h1 class="h3 mb-2 font-weight-normal"> Sign In</h1>
-            <input type="email" id="inputEmail" class="form-control mb-3" placeholder="Email address" formControlName="username">
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" formControlName="email">
+            <div class="form-control-feedback" *ngIf="email.errors && (email.dirty)">
+                    <small *ngIf="email.errors.required" class="text-danger">Email is required</small>
+                </div>
             <div class="password-area">
-                <input type="password" id="inputPassword" class="form-control" placeholder="Password"
+                <input type="password" id="inputPassword" class="form-control mt-3" placeholder="Password"
                     formControlName="password" [type]="hide? 'password': 'text'">
                 <a role="button" (click)="togglePwd()">
                     <i class="{{hide ? 'fa fa-eye-slash' : 'fa fa-eye'}}"></i>
                 </a>
+
+            <div class="form-control-feedback" *ngIf="password.errors && (password.dirty)">
+                    <small *ngIf="password.errors.required" class="text-danger">Please enter a password</small>
+                </div>
             </div>
             <button class="btn btn-success btn-block" type="submit"><i class="fa fa-sign-in"></i> Sign in <span
                     *ngIf="loading"><i class="fa fa-spin fa-spinner"></i></span> </button>

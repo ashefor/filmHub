@@ -20,19 +20,25 @@ export class LoginComponent implements OnInit {
 
   initialiseForm() {
     this.loginForm = this.formbuilder.group({
-      username: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      email: ['', Validators.required],
       password: ['', Validators.required],
       checked: [this.checked]
     })
   }
   login(formValues){
-    console.log(formValues.username, formValues.password)
-    this.authservice.signIn(formValues.username, formValues.password)
+    console.log(formValues.email, formValues.password)
+    this.authservice.signIn(formValues.email, formValues.password)
   }
   keepLoggedIn(e) {
     this.checked = e.target.checked
   }
   togglePwd(){
     this.hide = !this.hide
+  }
+  get email(){
+    return this.loginForm.get('email')
+  }
+  get password(){
+    return this.loginForm.get('password')
   }
 }
