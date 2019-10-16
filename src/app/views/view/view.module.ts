@@ -12,7 +12,7 @@ import { AuthGuard } from 'src/app/guards/auth.guard';
     CommonModule,
     RouterModule.forChild([
       {
-        path: ':id', component: ViewComponent
+        path: ':id', component: ViewComponent, canActivate: [AuthGuard]
       }
     ])
   ]

@@ -1,31 +1,39 @@
 <div id="logreg-forms">
-        <form action="/signup/" class="form-signup" [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
-            <h1 class="h3 mb-3 font-weight-normal"> Register</h1>
-            <input type="email" id="user-email" class="form-control mb-2" placeholder="Email address"
-                formControlName="email" required>
-            <input type="text" id="user-name" class="form-control mb-2" placeholder="choose a username"
-                formControlName="username" required>
-            <input type="password" id="user-pass" class="form-control mb-2" placeholder="Password"
-                formControlName="password" required>
-            <input type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password"
-                formControlName="confirmPassword" required>
-    
-            <div class="form-check mt-2">
+    <form action="/signup/" class="form-signup" [formGroup]="registerForm" (ngSubmit)="register(registerForm.value)">
+        <h1 class="h3 mb-3 font-weight-normal"> Register</h1>
+        <input type="email" id="user-email" class="form-control" placeholder="Email address" formControlName="email">
+        <small *ngIf="!validateEmail()" class="text-danger">
+            Please enter a valid email
+        </small>
+        <input type="text" id="user-name" class="form-control mt-2" placeholder="choose a username"
+            formControlName="username">
+        <small *ngIf="!validateUserName()" class="text-danger">
+            Please choose a username
+        </small>
+        <input type="password" id="user-pass" (keyup)="clearpwdError($event)" class="form-control mt-2"
+            placeholder="Password" formControlName="password">
+        <input type="password" id="user-repeatpass" (keyup)="clearpwdError($event)" class="form-control mt-2"
+            placeholder="Repeat Password" formControlName="confirmPassword">
+        <small class="text-danger" *ngIf="diffpasswords">
+            Passwords don't match
+        </small>
+
+        <!-- <div class="form-check mt-2">
                 <input type="checkbox" formControlName="checked" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">I agree to the <a href="#">Terms and
                         Conditions</a></label>
-            </div>
-            <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-user-plus"></i> Sign Up <span
-                    *ngIf="loading"><i class="fa fa-spin fa-spinner"></i></span> </button>
-    
-            <hr>
-            <!-- Don't have an account! -->
-            <div class="text-center">
-                <span>
-                    Already have an account? <a [routerLink]="['/auth/login']">Login here</a>
-                </span>
-            </div>
-        </form>
-    
-    
-    </div>
+            </div> -->
+        <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-user-plus"></i> Sign Up <span
+                *ngIf="loading"><i class="fa fa-spin fa-spinner"></i></span> </button>
+
+        <hr>
+        <!-- Don't have an account! -->
+        <div class="text-center">
+            <span>
+                Already have an account? <a [routerLink]="['/auth/login']">Login here</a>
+            </span>
+        </div>
+    </form>
+
+
+</div>

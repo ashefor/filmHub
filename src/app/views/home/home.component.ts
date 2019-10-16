@@ -10,6 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   user;
+  loading: boolean = true
   allDramas: any[] = [];
   allComedies: any[] = [];
   allActions: any[] = [];
@@ -61,7 +62,10 @@ export class HomeComponent implements OnInit, OnDestroy {
           // console.log(this.allDramas)
           this.allHorrors.push(horrorArr)
           // console.log(this.allHorrors)
+          this.loading = false
         }
+      }, err=>{
+        this.loading = false;
       })
     }
   }

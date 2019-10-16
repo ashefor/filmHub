@@ -13,7 +13,7 @@ import { AuthGuard } from 'src/app/guards/auth.guard';
     SlickCarouselModule,
     RouterModule.forChild([
       {
-        path: '', component: HomeComponent
+        path: '', component: HomeComponent, canActivate: [AuthGuard]
       }
     ])
   ]
