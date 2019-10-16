@@ -1,5 +1,74 @@
 <div *ngFor="let movie of movieData">
-        <!-- <div [style.background-image]="safeImg" class="bg-img">
+    <div class="wrapper">
+        <div [style.background-image]="safeImg" class="bg-img">
+        </div>
+        <div class="movie-wrapper">
+            <div class="movieView">
+                <div class="movieView-details">
+                    <div class="movie-meta">
+                        <h6 class="movie-title">{{movie.Title}}</h6>
+                        <div class="movie-meta-sub">
+                            <span>{{movie.Year}}</span>
+                            <span class="rating" title="Movie Rating">{{movie.Rated}}</span>
+                            <span> <i class="fa fa-clock-o" title="Movie runtime"></i> {{movie.Runtime}}</span>
+                        </div>
+                        <p>{{movie.Genre}}</p>
+                        <button class="btn btn-favorites">
+                            Add to favorites
+                        </button>
+                    </div>
+                </div>
+                <div class="scroll-down">
+                        <i class="fa fa-angle-down"></i>
+                </div>
+                <!-- <div [style.background]="safeImg" class="bg-img"></div> -->
+                <div class="movieView-img">
+                    <img [src]="movie.Poster" alt="">
+                </div>
+            </div>
+            <div class="overview">
+                  <div class="overview-meta">
+                    <div class="extra-det">
+                            <h5>Plot</h5>
+                                <p>
+                                        {{movie.Plot}}
+                                </p>
+                           </div>
+                    <div class="extra-det">
+                        <h5>Actors</h5>
+                            <p>
+                                    {{movie.Actors}}
+                            </p>
+                       </div>
+                       <div class="extra-det">
+                           <h5>Director</h5>
+                           <p>
+                                {{movie.Director}}
+                           </p>
+                       </div>
+                       <div class="extra-det">
+                           <h5>Writer(s)</h5>
+                           <p>
+                                {{movie.Writer}}
+                           </p>
+                       </div>
+                       <div class="extra-det">
+                           <h5>Country</h5>
+                            <p>
+                                    {{movie.Country}}
+                            </p>
+                       </div>
+                       <div class="extra-det">
+                           <h5>Language(s)</h5>
+                            <p>
+                                    {{movie.Language}}
+                            </p>
+                       </div> 
+                  </div> 
+            </div>
+        </div>
+    </div>
+    <!-- <div [style.background-image]="safeImg" class="bg-img">
               <h1 class="display-4">Hello, world!</h1>
          
           <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
@@ -9,13 +78,19 @@
             <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
           </p>
         </div> -->
-       <div class="movieView">
-            <div class="movieView-details">
-                    {{movie.Actors}}
-            </div>
-            <!-- <div [style.background]="safeImg" class="bg-img"></div> -->
-            <div class="movieView-img">
-                    <img [src]="movie.Poster" alt=""> 
-            </div>
+    <!-- <div>
+            {{movie.Actors}}
        </div>
-  </div>
+       <div>
+            {{movie.Director}}
+       </div>
+       <div>
+            {{movie.Writer}}
+       </div>
+       <div>
+            {{movie.Country}}
+       </div>
+       <div>
+            {{movie.Language}}
+       </div> -->
+</div>

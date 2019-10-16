@@ -1,17 +1,37 @@
+
+@font-face{
+    font-family: avenir;
+    // src: url("../../../assets/fonts/montserrat/Montserrat-LightItalic.otf")
+    src: url('../../../assets/fonts/AvenirNextLTPro-Regular.otf')
+}
+@font-face{
+    font-family: montserat;
+    src: url("../../../assets/fonts/montserrat/Montserrat-SemiBold.otf")
+}
+
 a{
     cursor: pointer;
 }
-.movierow{
-    margin: 3vw 0;
-    padding: 0
-}
-.my-container{
-    margin: 0 50px;
-    h5{
-        margin-bottom: 0.5rem;
-        color: #e5e5e5
+.allmovies{
+    margin-top: calc(60px + 3vw);
+
+    .movierow{
+        margin: 3vw 0;
+        padding: 0;
+    
+        .my-container{
+            margin: 0 50px;
+            h5{
+                font-family: 'montserat', sans-serif;
+                margin-bottom: 0.5rem;
+                color: #e5e5e5
+            }
+
+        }
     }
 }
+
+
 .lds-facebook {
     display: inline-block;
     position: relative;
@@ -55,3 +75,4 @@ a{
     transform: translate(-50%, -50%);
     z-index: 9999;
 }
+

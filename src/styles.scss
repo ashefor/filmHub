@@ -1,15 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
 body{
   background: #000 !important;
 }
-
+* {
+  box-sizing: border-box;
+}
 .slick-slider {
     width: calc(100% - 50px - 50px);
     margin: auto;
     // background: #000;
 }
 .slide{
-  background: url(./assets/noimg.png);
+  background: url(./assets/img/noimg.png);
   background-position: center;
   background-size: contain;
   background-repeat: no-repeat;

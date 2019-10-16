@@ -1,5 +1,12 @@
 <nav class="navbar navbar-dark navbar-expand-lg bg-black fixed-top">
-    <a class="navbar-brand" href="/home">filmHUB</a>
+   <span class="navbar-brand homenav">
+      <a href="/home">
+      <img src="../assets/img/netflix.png" alt="" width="30px" height="30px">
+    <span>
+        filmHUB
+    </span>
+  </a>
+   </span>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -23,6 +30,6 @@
      </div>
     </div>
   </nav>
-<div style="margin-top: 55px">
+<div class="has-nav-fixed">
     <router-outlet></router-outlet>
 </div>

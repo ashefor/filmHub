@@ -25,7 +25,7 @@ export class ViewComponent implements OnInit, OnDestroy {
           if(data){
             console.log(data)
             this.movieData = data;
-            this.safeImg = this.sanitizer.bypassSecurityTrustStyle(`url(${this.movieData[0].Poster}) no-repeat center center fixed`)
+            this.safeImg = this.sanitizer.bypassSecurityTrustStyle(`url(${this.movieData[0].Poster})`)
             // console.log(this.safeImg)
             console.log(this.movieData)
           }
