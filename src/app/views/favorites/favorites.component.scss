@@ -1,0 +1,32 @@
+.favmov{
+    color: white;
+    display: flex;
+    padding: 50px;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+
+    .fav{
+        width: calc(100% / 4);
+        height: 400px;;
+        margin: 3vw 0;
+        .zoom{
+            img{
+                transition: transform .2s;
+                &:hover{
+                    transform: scale(1.2)
+                }
+            }
+        }
+       
+    }
+
+    .favmovimg{
+        width: 350px;
+        height: 450px;
+
+        img{
+            
+        }
+    }
+}

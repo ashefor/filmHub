@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
 import { BehaviorSubject, Observable } from 'rxjs';
 import {
   map,
@@ -30,9 +30,27 @@ export class MoviesService {
       console.log('done')
     })
   }
+  removeFavorites(moviekey){
+    const userid = JSON.parse(localStorage.getItem('user'))
+    return this.db.list(`/favorites/${userid.uid}`).remove(moviekey).then(()=>{
+    })
+  }
 
-  getFavorites(){
+  // removeOneFav(movieId){
+  //   const userid = JSON.parse(localStorage.getItem('user'))
+  //   return this.db.list(`/favorites/${userid.uid}`, ref=> ref.remove('movieId'))
+  // }
+  getFav(){
+    const userid = JSON.parse(localStorage.getItem('user'))
+    return this.db.list(`/favorites/${userid.uid}`)
+  }
+  getFavs(){
     const userid = JSON.parse(localStorage.getItem('user'))
     return this.db.list(`/favorites/${userid.uid}`).valueChanges()
   }
+  getFavorites(){
+    const userid = JSON.parse(localStorage.getItem('user'))
+    return this.db.list(`/favorites/${userid.uid}`).snapshotChanges()
+  }
+
 }

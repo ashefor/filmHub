@@ -1,76 +1,76 @@
 <div class="spinner" *ngIf="loading">
-        <div class="lds-facebook">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+    <div class="lds-facebook">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
 </div>
 <ng-container *ngIf="!loading">
-   <div class="allmovies">
+    <div class="allmovies">
         <div class="movierow">
-                <div class="my-container">
-                    <h5 class="action">Action films</h5>
-                </div>
-                <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
-                    (breakpoint)="breakpoint($event)">
-                    <div ngxSlickItem *ngFor="let slide of testArr;" class="slide" style="height: 250px">
-                        <a routerLink="/view/{{slide.imdbID}}">
-                            <img src="{{ slide.Poster }}" alt="" width="100%" height="100%" class="slider_img">
-                        </a>
-                    </div>
-                </ngx-slick-carousel>
+            <div class="my-container">
+                <h5 class="action">Action films</h5>
             </div>
-            <div class="movierow">
-                <div class="my-container">
-                    <h5>Comedy films</h5>
+            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+                (breakpoint)="breakpoint($event)">
+                <div ngxSlickItem *ngFor="let slide of testArr;" class="slide" style="height: 250px">
+                    <a routerLink="/view/{{slide.imdbID}}">
+                        <img src="{{ slide.Poster }}" alt="" width="100%" height="100%" class="slider_img">
+                    </a>
                 </div>
-                <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
-                    (breakpoint)="breakpoint($event)">
-                    <div ngxSlickItem *ngFor="let slide of allComedies[0]" class="slide" style="height: 250px">
-                       <a routerLink="/view/{{slide.imdbID}}">
-                            <img src="{{ slide.Poster }}" alt="" width="100%" height="100%" class="slider_img">
-                       </a>
-                    </div>
-                </ngx-slick-carousel>
+            </ngx-slick-carousel>
+        </div>
+        <div class="movierow">
+            <div class="my-container">
+                <h5>Comedy films</h5>
             </div>
-            <div class="movierow">
-                <div class="my-container">
-                    <h5>Horror films</h5>
+            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+                (breakpoint)="breakpoint($event)">
+                <div ngxSlickItem *ngFor="let slide of allComedies[0]" class="slide" style="height: 250px">
+                    <a routerLink="/view/{{slide.imdbID}}">
+                        <img src="{{ slide.Poster }}" alt="" width="100%" height="100%" class="slider_img">
+                    </a>
                 </div>
-                <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
-                    (breakpoint)="breakpoint($event)">
-                    <div ngxSlickItem *ngFor="let slide of allHorrors[0]" class="slide" style="height: 250px">
-                            <a routerLink="/view/{{slide.imdbID}}">
-                                <img src="{{ slide.Poster }}" alt="" width="100%" height="100%" class="slider_img">
-                           </a>
-                    </div>
-                </ngx-slick-carousel>
+            </ngx-slick-carousel>
+        </div>
+        <div class="movierow">
+            <div class="my-container">
+                <h5>Horror films</h5>
             </div>
-            <div class="movierow">
-                <div class="my-container">
-                    <h5>Drama films</h5>
+            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+                (breakpoint)="breakpoint($event)">
+                <div ngxSlickItem *ngFor="let slide of allHorrors[0]" class="slide" style="height: 250px">
+                    <a routerLink="/view/{{slide.imdbID}}">
+                        <img src="{{ slide.Poster }}" alt="" width="100%" height="100%" class="slider_img">
+                    </a>
                 </div>
-                <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
-                    (breakpoint)="breakpoint($event)">
-                    <div ngxSlickItem *ngFor="let slide of allDramas[0]" class="slide" style="height: 250px">
-                            <a routerLink="/view/{{slide.imdbID}}">
-                                <img src="{{ slide.Poster }}" alt="" width="100%" height="100%" class="slider_img">
-                           </a>
-                    </div>
-                </ngx-slick-carousel>
+            </ngx-slick-carousel>
+        </div>
+        <div class="movierow">
+            <div class="my-container">
+                <h5>Drama films</h5>
             </div>
-            <div class="movierow">
-                <div class="my-container">
-                    <h5>Animated films</h5>
+            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+                (breakpoint)="breakpoint($event)">
+                <div ngxSlickItem *ngFor="let slide of allDramas[0]" class="slide" style="height: 250px">
+                    <a routerLink="/view/{{slide.imdbID}}">
+                        <img src="{{ slide.Poster }}" alt="" width="100%" height="100%" class="slider_img">
+                    </a>
                 </div>
-                <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
-                    (breakpoint)="breakpoint($event)">
-                    <div ngxSlickItem *ngFor="let slide of allAnimations[0]" class="slide" style="height: 250px">
-                            <a routerLink="/view/{{slide.imdbID}}">
-                                <img src="{{ slide.Poster }}" alt="" width="100%" height="100%" class="slider_img">
-                           </a>
-                    </div>
-                </ngx-slick-carousel>
+            </ngx-slick-carousel>
+        </div>
+        <div class="movierow">
+            <div class="my-container">
+                <h5>Animated films</h5>
             </div>
-   </div>
+            <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+                (breakpoint)="breakpoint($event)">
+                <div ngxSlickItem *ngFor="let slide of allAnimations[0]" class="slide" style="height: 250px">
+                    <a routerLink="/view/{{slide.imdbID}}">
+                        <img src="{{ slide.Poster }}" alt="" width="100%" height="100%" class="slider_img">
+                    </a>
+                </div>
+            </ngx-slick-carousel>
+        </div>
+    </div>
 </ng-container>

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-dark navbar-expand-lg bg-black fixed-top">
    <span class="navbar-brand homenav">
-      <a href="/home">
+      <a [routerLink]="['/home']" routerLinkActive="" >
       <img src="../assets/img/netflix.png" alt="" width="30px" height="30px">
     <span>
         filmHUB
@@ -12,14 +12,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <li class="nav-item">
+          <a class="nav-link" [routerLink]="['/home']" routerLinkActive="active">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="">Favorites</a>
+          <a class="nav-link" [routerLink]="['/favorites']" routerLinkActive="active">Favorites</a>
         </li>
       </ul>
-      <a role="button" [routerLink]="['/auth/login']" routerLinkActive="router-link-active"  *ngIf="!isLoggedIn" class="btn btn-primary">
+      <a role="button" [routerLink]="['/auth/login']" *ngIf="!isLoggedIn" class="btn btn-primary">
         Login
       </a>
      <div *ngIf="isLoggedIn">

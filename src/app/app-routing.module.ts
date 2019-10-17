@@ -14,6 +14,9 @@ const routes: Routes = [
   },
   {
     path: 'view', loadChildren: ()=> import('./views/view/view.module').then((m)=>m.ViewModule)
+  },
+  {
+    path: 'favorites', loadChildren: ()=> import('./views/favorites/favorites.module').then((m)=>m.FavoritesModule)
   }
 ];
 
