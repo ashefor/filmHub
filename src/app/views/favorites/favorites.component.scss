@@ -25,14 +25,12 @@
             transition: transform .5s ease-in-out;
             
             .imgText{
-                display: none;
                 transition: .5s ease;
                 opacity: 1;
                 color: white;
-                height: 100%;
                 width: 100%;
+                height: 100%;
                 position: absolute;
-                top: 0;
                 left: 0;
                 text-align: center;
                 background-color: rgba(0, 0, 0, 0.4);
@@ -79,7 +77,17 @@
     }
 }
 
-@media screen and (max-width: 767px){
+@media screen and (max-width: 449px){
+    .favmov{
+        padding: 10px;
+    }
+    .fav{
+        width: 100%;
+        // height: 400px;;
+        margin: 1.5vw 0;
+    }
+}
+@media screen and (min-width: 450px){
     .favmov{
         padding: 10px;
     }
@@ -87,6 +95,12 @@
         width: calc(100% / 2);
         // height: 400px;;
         margin: 2vw 0;
+    }
+}
+@media screen and (max-width: 767px){
+    .imgText{
+        display: block;
+        bottom: 0;
     }
 }
 @media screen and (min-width: 768px){
@@ -97,6 +111,10 @@
         width: calc(100% / 3);
         // height: 400px;;
         margin: 3vw 0;
+    }
+    .imgText{
+        display: none;
+        top: 0;
     }
 }
 @media screen and (min-width: 1024px){
