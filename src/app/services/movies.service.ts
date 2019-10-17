@@ -32,8 +32,7 @@ export class MoviesService {
   }
   removeFavorites(moviekey){
     const userid = JSON.parse(localStorage.getItem('user'))
-    return this.db.list(`/favorites/${userid.uid}`).remove(moviekey).then(()=>{
-    })
+    return this.db.list(`/favorites/${userid.uid}`).remove(moviekey)
   }
 
   // removeOneFav(movieId){

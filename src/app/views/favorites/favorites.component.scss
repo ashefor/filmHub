@@ -1,32 +1,108 @@
 .favmov{
     color: white;
     display: flex;
-    padding: 50px;
     flex-wrap: wrap;
     justify-content: left;
     align-items: center;
 
     .fav{
-        width: calc(100% / 4);
-        height: 400px;;
-        margin: 3vw 0;
-        .zoom{
+        // width: calc(100% / 4);
+        // // height: 400px;;
+        // margin: 3vw 0;
+
+        .imgdiv{
+            height: 400px;;
+
             img{
-                transition: transform .2s;
-                &:hover{
-                    transform: scale(1.2)
+                opacity: 1;
+                display: block;
+                width: 100%;
+                transition: .5s ease;
+            }
+        }
+        .zoom{
+            position: relative;
+            transition: transform .5s ease-in-out;
+            
+            .imgText{
+                display: none;
+                transition: .5s ease;
+                opacity: 1;
+                color: white;
+                height: 100%;
+                width: 100%;
+                position: absolute;
+                top: 0;
+                left: 0;
+                text-align: center;
+                background-color: rgba(0, 0, 0, 0.4);
+
+                .imgText-actions{
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+
+                    span{
+                        cursor: pointer;
+                        margin: 1.5rem 0;
+
+                        .viewmovie{
+                            color: white;
+                            padding: .375rem .75rem;
+                            background-color: olivedrab;
+                            border: none;
+                        }
+                        .hasFav{
+                            color: white;
+                            background-color: red;
+                        }
+                    }
+                }
+              }
+            &:hover{
+                transform: scale(1.1);
+                z-index: 99;
+                img{
+                //    opacity: 0.2;
+                }
+                .imgText{
+                    // opacity: 1;
+                    display: block;
                 }
             }
+
+           
         }
        
     }
+}
 
-    .favmovimg{
-        width: 350px;
-        height: 450px;
-
-        img{
-            
-        }
+@media screen and (max-width: 767px){
+    .favmov{
+        padding: 10px;
+    }
+    .fav{
+        width: calc(100% / 2);
+        // height: 400px;;
+        margin: 2vw 0;
+    }
+}
+@media screen and (min-width: 768px){
+    .favmov{
+        padding: 50px;
+    }
+    .fav{
+        width: calc(100% / 3);
+        // height: 400px;;
+        margin: 3vw 0;
+    }
+}
+@media screen and (min-width: 1024px){
+    .fav{
+        width: calc(100% / 4);
+        // height: 400px;;
+        margin: 3vw 0;
     }
 }

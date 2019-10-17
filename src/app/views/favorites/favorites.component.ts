@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { MoviesService } from 'src/app/services/movies.service';
 import { Observable } from 'rxjs';
+import { faEye, faHeart } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-favorites',
@@ -9,7 +10,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./favorites.component.scss']
 })
 export class FavoritesComponent implements OnInit {
-  allFavMovies = []
+  allFavMovies = [];
+  uniquearr = []
+  faEye = faEye;
+  faHeart = faHeart;
   newFav: Observable<any>
   constructor(private authservice: AuthService, private movieservice: MoviesService) { }
 
@@ -18,84 +22,38 @@ export class FavoritesComponent implements OnInit {
       const loggeduser = JSON.parse(localStorage.getItem('user'))
       if(loggeduser.uid){
         console.log(loggeduser.uid)
-        this.movieservice.getFavs().subscribe((data: any)=>{
-          this.allFavMovies = data;
-          console.log(this.allFavMovies)
-          // if(this.allFavMovies.some(id=> id.imdbID === this.movieId)){
-          //   this.hasFavorite = true;
-          // }else{
-          //   this.hasFavorite = false
-          // }
+        this.movieservice.getFavorites().subscribe((data:any)=>{
+          data.forEach(element => {
+            this.allFavMovies.push({key: element.key,...element.payload.val()})
+            const arr = [];
+              let arr2 = []
+            this.allFavMovies.forEach(elem=>{
+              arr.push(JSON.stringify(elem))
+              // console.log(arr)
+              arr2 = Array.from(new Set(arr))
+              console.log(arr2)
+              const arra = []
+              arr2.forEach(elem=>{
+                console.log(JSON.parse(elem))
+                this.uniquearr.push(JSON.parse(elem));
+                const arrr: Array<any> =  new Array
+                arra.push(JSON.parse(elem))
+                console.log(arra)
+              })
+              this.uniquearr = arra;
+              console.log(this.uniquearr)
+            })
+          });
         })
       }
     }
   }
-
-  slideConfig = {
-    slidesToShow: 6,
-    slidesToScroll: 6,
-    nextArrow: `<div class="nav-btn next-slide">
-    <i class="fa fa-angle-right f-50"></i>
-    </div>`,
-    prevArrow: `<div class="nav-btn prev-slide">
-    <i class="fa fa-angle-left f-50"></i>
-    </div>`,
-    dots: false,
-    infinite: true,
-    responsive: [
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 5,
-          slidesToScroll: 5,
-          infinite: true,
-          dots: true
-        }
-      },
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 4,
-          slidesToScroll: 4,
-          infinite: true,
-          dots: false
-        }
-      },
-      {
-        breakpoint: 992,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-          infinite: true,
-          dots: false
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          infinite: true,
-          arrows: false,
-          // autoplay: true,
-          dots: false
-        }
-      },
-      {
-        breakpoint: 480,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          infinite: true,
-          arrows: false,
-          // autoplay: true,
-          dots: false
-        }
-      }
-    ]
-  };
-  breakpoint(e) {
-    console.log('breakpoint');
+  remove(key){
+    this.movieservice.removeFavorites(key).then(()=>{
+      const index = this.uniquearr.findIndex((id)=>id.key === key)
+      console.log(index)
+      this.uniquearr.splice(index, 1)
+    })
   }
 
 }

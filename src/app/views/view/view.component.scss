@@ -116,7 +116,14 @@
                         color: white;
                         font-family: 'montserat-regular',sans-serif;
                         text-transform: uppercase;
+                        // background-color: red;
+                    }
+
+                    .hasFav{
                         background-color: red;
+                    }
+                    .hasNotFav{
+                        background-color: olivedrab
                     }
                 }
                 
@@ -237,7 +244,7 @@
 }
 @media screen and (min-width: 1024px){
     .btn-favorites{
-        width: 50%;
+        width: 60%;
     }
     .scroll-down{
         display: flex;

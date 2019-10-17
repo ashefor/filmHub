@@ -22,8 +22,8 @@
                                 <span> <i class="fa fa-clock-o" title="Movie runtime"></i> {{movie.Runtime}}</span>
                             </div>
                             <p>{{movie.Genre}}</p>
-                            <button class="btn btn-favorites" type="button" (click)="addToFavorites()">
-                                
+                            <button [class]="hasFavorite? 'btn btn-favorites hasFav' : 'btn btn-favorites hasNotFav'" type="button" (click)="addToFavorites()">
+                                <i class="{{hasFavorite? 'fa fa-heart' : 'fa fa-check'}}"></i>
                                 {{hasFavorite? 'Remove from favorites' : 'Add to favorites'}}
                             </button>
                         </div>

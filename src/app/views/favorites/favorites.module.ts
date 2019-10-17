@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FavoritesComponent } from './favorites.component';
 import { SlickCarouselModule} from 'ngx-slick-carousel'
 import { RouterModule } from '@angular/router';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     SlickCarouselModule,
+    FontAwesomeModule,
     RouterModule.forChild([
       {
         path: '', component: FavoritesComponent

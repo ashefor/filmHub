@@ -6,18 +6,34 @@
                 </div>
                 <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
                     (breakpoint)="breakpoint($event)">
-                    <div ngxSlickItem *ngFor="let slide of allFavMovies;" class="slide" style="height: 450px">
+                    <div ngxSlickItem *ngFor="let slide of uniquearr;" class="slide" style="height: 450px">
                         <a routerLink="/view/{{slide.imdbID}}">
                             <img src="{{ slide.Poster }}" alt="" width="100%" height="100%" class="slider_img">
                         </a>
                     </div>
                 </ngx-slick-carousel>
             </div> -->
-            <div *ngFor="let slide of allFavMovies;" class="fav">
-                    <div style="height: 100%" class="zoom">
-                            <a routerLink="/view/{{slide.imdbID}}" class="favmovimg">
-                                <img src="{{ slide.Poster }}" alt="" width="100%" height="100%" class="slider_img">
-                            </a>
-                    </div>
+            <div *ngFor="let slide of uniquearr;" class="fav">
+               
+                        <div style="height: 100%" class="zoom">
+                                   <div class="imgdiv">
+                                        <img src="{{ slide.Poster }}" alt="" width="100%" height="100%" class="slider_img">
+                                   </div>
+                                <div class="imgText">
+                                     <div class="imgText-actions">
+                                            <span>
+                                                    <a routerLink="/view/{{slide.imdbID}}" class="viewmovie">
+                                                         View
+                                                        </a>
+                                              </span>
+                                             <span (click)="remove(slide.key)">
+                                                    <button class="btn hasFav" role="button">
+                                                            <fa-icon [icon]="faHeart"></fa-icon> 
+                                                            Remove from favorites
+                                                    </button>
+                                             </span>
+                                     </div>
+                                      </div>
+                        </div>
             </div>
         </div>
