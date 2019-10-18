@@ -4,6 +4,8 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 The Firebase was used as a backend for users and users favorite movie(s)
 
+[Repo Preview](Screenshot 2019-10-18 at 8.32.51 PM.PNG)
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
