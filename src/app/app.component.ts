@@ -21,9 +21,6 @@ export class AppComponent implements OnInit {
     })
   }
   ngOnInit() {
-    // this.movieservice.singleMovieID().subscribe(data=>{
-    //   console.log(data)
-    // })
     let navbar = document.querySelector('#navbarText')
     if (navbar.classList.contains('show')) {
       navbar.classList.remove('show')

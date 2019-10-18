@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private movieservice: MoviesService, private authservice: AuthService) { }
 
   ngOnInit() {
+    window.scrollTo(0,0)
     let navbar = document.querySelector('#navbarText')
     if (navbar.classList.contains('show')) {
       navbar.classList.remove('show')

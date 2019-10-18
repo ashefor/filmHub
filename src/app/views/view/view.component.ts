@@ -24,9 +24,17 @@ export class ViewComponent implements OnInit, OnDestroy {
   allFavMovies = []
   newmov = []
   public safeImg: SafeResourceUrl
-  constructor(private movieservice: MoviesService, private route: ActivatedRoute, private authservice: AuthService, private sanitizer: DomSanitizer) { }
+  constructor(private movieservice: MoviesService, private route: ActivatedRoute, private authservice: AuthService, private sanitizer: DomSanitizer) {
+      
+   }
 
   ngOnInit() {
+    window.scrollTo(0,0)
+    let navbar = document.querySelector('#navbarText')
+    if (navbar.classList.contains('show')) {
+      navbar.classList.remove('show')
+    }
+  
     if (this.authservice.isLoggedIn) {
       const loggeduser = JSON.parse(localStorage.getItem('user'))
       if (loggeduser.uid) {
@@ -91,5 +99,9 @@ export class ViewComponent implements OnInit, OnDestroy {
         this.hasFavorite = false;
       })
     }
+  }
+
+  scrolldown(){
+    console.log('scrolling')
   }
 }

@@ -16,6 +16,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   constructor(private route: ActivatedRoute, private movieservice: MoviesService) { }
 
   ngOnInit() {
+    window.scrollTo(0,0)
+    let navbar = document.querySelector('#navbarText')
+    if (navbar.classList.contains('show')) {
+      navbar.classList.remove('show')
+    }
     this.route.queryParams.subscribe((data:Params)=>{
       this.searchParam = data['s']
       console.log(this.searchParam)

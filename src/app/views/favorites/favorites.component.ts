@@ -20,6 +20,7 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   constructor(private authservice: AuthService, private movieservice: MoviesService) { }
 
   ngOnInit() {
+    window.scrollTo(0,0)
     let navbar = document.querySelector('#navbarText')
     if (navbar.classList.contains('show')) {
       navbar.classList.remove('show')
