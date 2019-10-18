@@ -1,6 +1,8 @@
 # FilmHub
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.3.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.3 and Firebase through [Angular Fire](https://github.com/angular/angularfire).
+
+The Firebase was used as a backend for users and users favorite movie(s)
 
 ## Development server
 
