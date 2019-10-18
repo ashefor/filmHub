@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 The Firebase was used as a backend for users and users favorite movie(s)
 
-![Repo Preview](Screenshot 2019-10-18 at 8.33.47 PM.png)
+![Repo Preview](sc1.png) ![Repo Preview](sc2.png) ![Repo Preview](sc3.png) ![Repo Preview](sc4.png)
 
 ## Development server
 
