@@ -40,7 +40,7 @@ export class MoviesService {
   }
 
   searchForMovie(movie){
-    return this.http.get(`http://www.omdbapi.com/?s=${movie}&apikey=8e507b1&type=movie&page=3`)
+    return this.http.get(`https://www.omdbapi.com/?s=${movie}&apikey=8e507b1&type=movie&page=3`)
   }
 
   singleMovieID(id){
