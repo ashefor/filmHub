@@ -15,6 +15,11 @@ export class LoginComponent implements OnInit {
   constructor(private formbuilder: FormBuilder, private authservice: AuthService) { }
 
   ngOnInit() {
+    window.scrollTo(0,0)
+    let navbar = document.querySelector('#navbarText')
+    if (navbar.classList.contains('show')) {
+      navbar.classList.remove('show')
+    }
     this.initialiseForm()
   }
 

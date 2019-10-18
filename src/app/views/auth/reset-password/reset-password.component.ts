@@ -10,7 +10,12 @@ export class ResetPasswordComponent implements OnInit {
   resetForm: FormGroup
   constructor(private formbuilder: FormBuilder) { }
 
-  ngOnInit() {
+  ngOnInit() { 
+    window.scrollTo(0,0)
+    let navbar = document.querySelector('#navbarText')
+    if (navbar.classList.contains('show')) {
+      navbar.classList.remove('show')
+    }
     this.initialiseForm()
   }
 

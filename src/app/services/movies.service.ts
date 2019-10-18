@@ -44,6 +44,6 @@ export class MoviesService {
   }
 
   singleMovieID(id){
-    return this.http.get(`http://www.omdbapi.com/?i=${id}&apikey=8e507b1`)
+    return this.http.get(`https://www.omdbapi.com/?i=${id}&apikey=8e507b1`)
   }
 }
