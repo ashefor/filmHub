@@ -19,6 +19,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   newmov = [];
   movieId: any;
   hasFavorite: boolean = false;
+  nomovie: boolean;
+  result: any;
   constructor(private route: ActivatedRoute, private authservice: AuthService, private movieservice: MoviesService) { }
 
   ngOnInit() {
@@ -30,13 +32,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     if (this.authservice.isLoggedIn) {
       const loggeduser = JSON.parse(localStorage.getItem('user'))
       if (loggeduser.uid) {
-        this.subsciption = this.movieservice.getFavorites().subscribe((data: any) => {
-          this.allFavMovies = data;
-          data.forEach(element => {
-            this.newmov.push({ key: element.key, ...element.payload.val() })
-            console.log(this.newmov)
-          });
-        })
         this.route.queryParams.subscribe((data: Params) => {
           this.searchParam = data['s']
           console.log(this.searchParam)
@@ -44,20 +39,15 @@ export class SearchComponent implements OnInit, OnDestroy {
             if (data) {
               this.loading = false;
               console.log(data)
+              if(data.Response === 'False'){
+                this.nomovie = true;
+              this.result = data.Error;
+              console.log(this.result)
+              }
               if (data.Response === 'True') {
+                this.nomovie = false;
                 this.searchResults = data.Search
-                // console.log(this.searchResults)
-                this.searchResults.forEach((elem: any) => {
-                  console.log(elem.imdbID)
-                  // console.log(this.newmov)
-                  if (this.newmov.some(objectid => objectid.imdbID === elem.imdbID)) {
-                    this.hasFavorite = false;
-                    console.log(elem)
-                    console.log('has favd')
-                  } else {
-                    // this.hasFavorite = false
-                  }
-                })
+                console.log(this.searchResults)
               }
             }
           })
@@ -73,6 +63,6 @@ export class SearchComponent implements OnInit, OnDestroy {
     }
   }
   remove(e){
-    
+
   }
 }

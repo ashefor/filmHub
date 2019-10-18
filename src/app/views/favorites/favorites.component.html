@@ -1,32 +1,39 @@
 <div class="spinner" *ngIf="loading">
-        <div class="lds-facebook">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
+    <div class="lds-facebook">
+        <div></div>
+        <div></div>
+        <div></div>
     </div>
-<div class="favmov">
+</div>
+<div class="favmov" *ngIf="!loading">
+    <div *ngIf="noMovies">
+        <p class="nomovies">
+            No Favorites
+        </p>
+    </div>
+    <ng-container *ngIf="!noMovies">
             <div *ngFor="let slide of uniquearr;" class="fav">
-               
-                        <div style="height: 100%" class="zoom">
-                                   <div class="imgdiv">
-                                        <img src="{{ slide.Poster }}" alt="" width="100%" height="100%" class="slider_img">
-                                   </div>
-                                <div class="imgText">
-                                     <div class="imgText-actions">
-                                            <span>
-                                                    <a routerLink="/view/{{slide.imdbID}}" class="viewmovie">
-                                                         View
-                                                        </a>
-                                              </span>
-                                             <span (click)="remove(slide.key)">
-                                                    <button class="btn hasFav" role="button">
-                                                            <fa-icon [icon]="faHeart"></fa-icon> 
-                                                            Remove from favorites
-                                                    </button>
-                                             </span>
-                                     </div>
-                                      </div>
+
+                    <div style="height: 100%" class="zoom">
+                        <div class="imgdiv">
+                            <img src="{{ slide.Poster }}" alt="" width="100%" height="100%" class="slider_img">
                         </div>
-            </div>
-        </div>
+                        <div class="imgText">
+                            <div class="imgText-actions">
+                                <span>
+                                    <a routerLink="/view/{{slide.imdbID}}" class="viewmovie">
+                                        View
+                                    </a>
+                                </span>
+                                <span (click)="remove(slide.key)">
+                                    <button class="btn hasFav" role="button">
+                                        <fa-icon [icon]="faHeart"></fa-icon>
+                                        Remove from favorites
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    </ng-container>
+</div>

@@ -33,6 +33,10 @@
     max-width: 410px;
     padding: 15px;
     margin: auto;
+    height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center
   }
   #logreg-forms .form-control {
     position: relative;

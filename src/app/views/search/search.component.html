@@ -5,8 +5,14 @@
             <div></div>
         </div>
     </div>
-<div class="favmov">
-            <div *ngFor="let slide of searchResults;" class="fav">
+<div class="favmov" *ngIf="!loading">
+        <div *ngIf="nomovie">
+                <p class="nomovies">
+                        {{result}}
+                </p>
+            </div>
+           <ng-container *ngIf="!nomovie">
+                <div *ngFor="let slide of searchResults;" class="fav">
                
                         <div style="height: 100%" class="zoom">
                                    <div class="imgdiv">
@@ -35,4 +41,5 @@
                                       </div>
                         </div>
             </div>
+           </ng-container>
         </div>

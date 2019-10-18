@@ -1,6 +1,7 @@
 <div id="logreg-forms">
         <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
-            <h1 class="h3 mb-2 font-weight-normal"> Sign In</h1>
+            <h1 class="h3 mb-2 font-weight-normal text-center"> Sign In</h1>
+
             <input type="email" id="inputEmail" class="form-control" placeholder="Email address" formControlName="email">
             <div class="form-control-feedback" *ngIf="email.errors && (email.dirty)">
                     <small *ngIf="email.errors.required" class="text-danger">Email is required</small>

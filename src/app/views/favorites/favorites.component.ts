@@ -14,6 +14,7 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   uniquearr = []
   faEye = faEye;
   faHeart = faHeart;
+  noMovies: boolean
   loading: boolean = true;
   newFav: Observable<any>
   subscription: Subscription;
@@ -30,6 +31,10 @@ export class FavoritesComponent implements OnInit, OnDestroy {
       if (loggeduser.uid) {
         this.subscription = this.movieservice.getFavorites().subscribe((data: any) => {
           if (data) {
+            if(data.length === 0){
+              console.log('none')
+              this.noMovies = true;
+            }
             data.forEach(element => {
               this.allFavMovies.push({ key: element.key, ...element.payload.val() })
               const arr = [];
