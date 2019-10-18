@@ -23,11 +23,14 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(private movieservice: MoviesService, private authservice: AuthService) { }
 
   ngOnInit() {
+    let navbar = document.querySelector('#navbarText')
+    if (navbar.classList.contains('show')) {
+      navbar.classList.remove('show')
+    }
     if (this.authservice.isLoggedIn) {
       this.subsciption = this.movieservice.getAllMovies().subscribe(value => {
         if (value) {
           this.allMovies = value;
-          // console.log(this.allMovies)
           let actionArr: Array<any> = new Array()
           let animationArr: Array<any> = new Array()
           let comedyArr: Array<any> = new Array()
@@ -52,19 +55,13 @@ export class HomeComponent implements OnInit, OnDestroy {
             }
           })
           this.allActions.push(actionArr)
-          this.testArr = this.allActions[0]
-          // console.log(this.testArr)
           this.allAnimations.push(animationArr)
-          // console.log(this.allAnimations)
           this.allComedies.push(comedyArr)
-          // console.log(this.allComedies)
           this.allDramas.push(dramaArr)
-          // console.log(this.allDramas)
           this.allHorrors.push(horrorArr)
-          // console.log(this.allHorrors)
           this.loading = false
         }
-      }, err=>{
+      }, err => {
         this.loading = false;
       })
     }
@@ -138,7 +135,4 @@ export class HomeComponent implements OnInit, OnDestroy {
       }
     ]
   };
-  breakpoint(e) {
-    console.log('breakpoint');
-  }
 }

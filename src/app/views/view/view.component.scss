@@ -58,12 +58,9 @@
 
 .wrapper{
     position: relative;
-    // height: calc(100vh - 2vw - 60px);
-    height: 100%;
+    height: 100vh;
 
     .bg-img{
-        // height: calc(100vh - 3vw - 60px);
-        // height: 300px;
         position: fixed;
         top: 60px;
         width: 100%;
@@ -116,7 +113,6 @@
                         color: white;
                         font-family: 'montserat-regular',sans-serif;
                         text-transform: uppercase;
-                        // background-color: red;
                     }
 
                     .hasFav{
@@ -178,12 +174,8 @@
 }
 
 @media (max-width: 767px){
-    .bg-img{
-        // display: none;
-    } 
     .movieView{
         padding: 10px;
-        // height: 60vh;
     }
     .overview{
         padding: 1rem;
@@ -223,13 +215,12 @@
         display: flex;
     }
     .movie-wrapper{
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */;
+        background-color: rgb(0,0,0);
+        background-color: rgba(0,0,0, 0.4); 
         position: absolute;
-        top: 49%;
+        top: 0;
         left: 50%;
-        // transform: translate(-50%, -50%);
-        transform: translate(-50%, -1%);
+        transform: translate(-50%);
         width: 100%;
         z-index: 2;
     }

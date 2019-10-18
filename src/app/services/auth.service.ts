@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   user: firebase.User;
+  redirectUrl: string
   public currentUserSubject = new BehaviorSubject({})
   currentUser = this.currentUserSubject.asObservable()
   constructor(private auth: AngularFireAuth, private router: Router) {
@@ -16,11 +17,10 @@ export class AuthService {
     this.auth.authState.subscribe((user) => {
       if (user) {
         this.user = user
-        console.log(this.user)
         localStorage.setItem('user', JSON.stringify(this.user));
         JSON.parse(localStorage.getItem('user'))
         this.currentUserSubject.next(JSON.parse(localStorage.getItem('user')))
-      }else{
+      } else {
         localStorage.setItem('user', null);
         JSON.parse(localStorage.getItem('user'))
         this.currentUserSubject.next(JSON.parse(localStorage.getItem('user')))
@@ -30,10 +30,10 @@ export class AuthService {
 
   signUp(username, email, password) {
     this.auth.auth.createUserWithEmailAndPassword(email, password).then((value) => {
-      if (value){
+      if (value) {
         return value.user.updateProfile({
           displayName: username
-        }).then(()=>{
+        }).then(() => {
           localStorage.setItem('user', JSON.stringify(value.user));
           JSON.parse(localStorage.getItem('user'))
           this.currentUserSubject.next(JSON.parse(localStorage.getItem('user')))
@@ -58,8 +58,8 @@ export class AuthService {
     })
   }
 
-  sendVerificationMail(){
-    this.auth.auth.currentUser.sendEmailVerification().then((data)=>{
+  sendVerificationMail() {
+    this.auth.auth.currentUser.sendEmailVerification().then((data) => {
       this.router.navigate(['/auth/verify-email'])
     })
   }

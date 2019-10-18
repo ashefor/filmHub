@@ -6,7 +6,7 @@
         </div>
     </div>
 <div class="favmov">
-            <div *ngFor="let slide of uniquearr;" class="fav">
+            <div *ngFor="let slide of searchResults;" class="fav">
                
                         <div style="height: 100%" class="zoom">
                                    <div class="imgdiv">
@@ -21,8 +21,7 @@
                                               </span>
                                              <span (click)="remove(slide.key)">
                                                     <button class="btn hasFav" role="button">
-                                                            <fa-icon [icon]="faHeart"></fa-icon> 
-                                                            Remove from favorites
+                                                            Add to favorites
                                                     </button>
                                              </span>
                                      </div>

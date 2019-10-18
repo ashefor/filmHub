@@ -4,6 +4,7 @@ import { FavoritesComponent } from './favorites.component';
 import { SlickCarouselModule} from 'ngx-slick-carousel'
 import { RouterModule } from '@angular/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 
 @NgModule({
@@ -14,7 +15,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FontAwesomeModule,
     RouterModule.forChild([
       {
-        path: '', component: FavoritesComponent
+        path: '', component: FavoritesComponent, canActivate: [AuthGuard]
       }
     ])
   ]

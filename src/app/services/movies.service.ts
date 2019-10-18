@@ -1,13 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { AngularFireDatabase, AngularFireList } from '@angular/fire/database';
-import { BehaviorSubject, Observable } from 'rxjs';
-import {
-  map,
-  switchMap,
-  debounceTime,
-  distinctUntilChanged
-} from 'rxjs/operators';
+import { AngularFireDatabase } from '@angular/fire/database';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -15,8 +8,7 @@ import { AuthService } from './auth.service';
 })
 export class MoviesService {
 
-  constructor(private http: HttpClient, private db: AngularFireDatabase,
-    private authservice: AuthService) { }
+  constructor(private http: HttpClient, private db: AngularFireDatabase) { }
 
   getAllMovies(){
     return this.db.list('/allMovies').valueChanges()
@@ -34,11 +26,6 @@ export class MoviesService {
     const userid = JSON.parse(localStorage.getItem('user'))
     return this.db.list(`/favorites/${userid.uid}`).remove(moviekey)
   }
-
-  // removeOneFav(movieId){
-  //   const userid = JSON.parse(localStorage.getItem('user'))
-  //   return this.db.list(`/favorites/${userid.uid}`, ref=> ref.remove('movieId'))
-  // }
   getFav(){
     const userid = JSON.parse(localStorage.getItem('user'))
     return this.db.list(`/favorites/${userid.uid}`)
@@ -52,4 +39,11 @@ export class MoviesService {
     return this.db.list(`/favorites/${userid.uid}`).snapshotChanges()
   }
 
+  searchForMovie(movie){
+    return this.http.get(`http://www.omdbapi.com/?s=${movie}&apikey=8e507b1&type=movie&page=3`)
+  }
+
+  singleMovieID(id){
+    return this.http.get(`http://www.omdbapi.com/?i=${id}&apikey=8e507b1`)
+  }
 }

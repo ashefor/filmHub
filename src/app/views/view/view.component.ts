@@ -17,7 +17,8 @@ export class ViewComponent implements OnInit, OnDestroy {
   loading: boolean = true;
   faChevronCircleDown = faChevronCircleDown;
   movieId: string;
-  movieData: any;
+  movieData = [];
+  movieObject;
   subsciption: Subscription;
   hasFavorite;
   allFavMovies = []
@@ -29,16 +30,13 @@ export class ViewComponent implements OnInit, OnDestroy {
     if (this.authservice.isLoggedIn) {
       const loggeduser = JSON.parse(localStorage.getItem('user'))
       if (loggeduser.uid) {
-        this.movieservice.getFavorites().subscribe((data: any) => {
+        this.subsciption = this.movieservice.getFavorites().subscribe((data: any) => {
           this.allFavMovies = data;
           data.forEach(element => {
-            console.log(element.type)
             this.newmov.push({ key: element.key, ...element.payload.val() })
-            console.log(this.newmov.sort())
           });
           if (this.newmov.sort().some(objectid => objectid.imdbID === this.movieId)) {
             this.hasFavorite = true;
-            // console.log(this.newmov.key)
           } else {
             this.hasFavorite = false
           }
@@ -47,15 +45,27 @@ export class ViewComponent implements OnInit, OnDestroy {
       }
       this.route.params.subscribe((data: Params) => {
         this.movieId = data['id']
-        this.subsciption = this.movieservice.getSingleMovie(this.movieId).subscribe((data: any) => {
+        const subsciption = this.movieservice.getSingleMovie(this.movieId).subscribe((data: any) => {
           if (data) {
+            if(data.length === 1){
             this.movieData = data;
-            this.safeImg = this.sanitizer.bypassSecurityTrustStyle(`url(${this.movieData[0].Poster})`)
-            this.loading = false
+              this.safeImg = this.sanitizer.bypassSecurityTrustStyle(`url(${this.movieData[0].Poster})`)
+              this.loading = false
+            }else{
+              const moviesearch = this.movieservice.singleMovieID(this.movieId).subscribe(data=>{
+              if(data){
+                this.movieData.push(data);
+                this.safeImg = this.sanitizer.bypassSecurityTrustStyle(`url(${this.movieData[0].Poster})`)
+                this.loading = false
+              }
+              this.subsciption.add(moviesearch)
+              })
+            }
           }
         }, (err: any) => {
           this.loading = false
         })
+        this.subsciption.add(subsciption)
       })
     }
   }
@@ -66,25 +76,19 @@ export class ViewComponent implements OnInit, OnDestroy {
   }
 
   addToFavorites() {
-    // console.log(this.movieData[0])
     if (!this.hasFavorite) {
       const found = this.newmov.findIndex((id => id.imdbID === this.movieId))
-      console.log(found)
       if (found === -1) {
-        console.log('lewl')
         this.movieservice.addToFavorites(this.movieData[0]).then(() => {
           this.hasFavorite = true;
-          console.log('added')
         })
       }
     } else {
-      console.log('removed')
       const found = this.newmov.find((id => id.imdbID === this.movieId)).key
       this.movieservice.removeFavorites(found).then(() => {
         const index = this.newmov.findIndex((id => id.imdbID === this.movieId))
         this.newmov.splice(index, 1)
         this.hasFavorite = false;
-        console.log('removed')
       })
     }
   }
