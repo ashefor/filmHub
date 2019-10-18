@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { MoviesService } from 'src/app/services/movies.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
@@ -23,6 +23,7 @@ export class ViewComponent implements OnInit, OnDestroy {
   hasFavorite;
   allFavMovies = []
   newmov = []
+  @ViewChild('target', {static:false}) scrooller: ElementRef<HTMLElement>
   public safeImg: SafeResourceUrl
   constructor(private movieservice: MoviesService, private route: ActivatedRoute, private authservice: AuthService, private sanitizer: DomSanitizer) {
       
@@ -102,6 +103,6 @@ export class ViewComponent implements OnInit, OnDestroy {
   }
 
   scrolldown(){
-    console.log('scrolling')
+    this.scrooller.nativeElement.scrollIntoView()
   }
 }

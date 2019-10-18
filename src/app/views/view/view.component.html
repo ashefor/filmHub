@@ -31,14 +31,16 @@
                     <div class="scroll-down">
                             <!-- <i class="fa fa-angle-down"></i> -->
     
-                            <fa-icon [icon]='faChevronCircleDown'></fa-icon>
+                           <span (click)="scrolldown()">
+                                <fa-icon [icon]='faChevronCircleDown' ></fa-icon>
+                           </span>
                     </div>
                     <!-- <div [style.background]="safeImg" class="bg-img"></div> -->
                     <div class="movieView-img">
                         <img [src]="movie.Poster" alt="">
                     </div>
                 </div>
-                <div class="overview">
+                <div class="overview" #target>
                       <div class="overview-meta">
                         <div class="extra-det">
                                 <h5>Plot</h5>

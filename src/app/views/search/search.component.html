@@ -20,9 +20,16 @@
                                                         </a>
                                               </span>
                                              <span (click)="remove(slide.key)">
-                                                    <button class="btn hasFav" role="button">
+                                                    <!-- <button class="btn hasFav" role="button">
                                                             Add to favorites
-                                                    </button>
+                                                    </button> -->
+                                                    <!-- <button [class]="hasFavorite? 'btn btn-favorites hasFav' : 'btn btn-favorites hasNotFav'" type="button">
+                                                            <i class="{{hasFavorite? 'fa fa-heart' : 'fa fa-check'}}"></i>
+                                                            {{hasFavorite? 'Remove from favorites' : 'Add to favorites'}}
+                                                        </button>
+                                                        <div *ngIf="hasFavorite">
+                                                                Like
+                                                        </div> -->
                                              </span>
                                      </div>
                                       </div>
