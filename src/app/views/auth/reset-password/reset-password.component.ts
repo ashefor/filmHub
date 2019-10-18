@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-reset-password',
@@ -7,8 +9,11 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent implements OnInit {
-  resetForm: FormGroup
-  constructor(private formbuilder: FormBuilder) { }
+  resetForm: FormGroup;
+  passwordsent: boolean = false;
+  constructor(private formbuilder: FormBuilder, private title: Title, private authservice: AuthService) { 
+    this.title.setTitle('Reset Password - filmHub')
+  }
 
   ngOnInit() { 
     window.scrollTo(0,0)
@@ -21,7 +26,16 @@ export class ResetPasswordComponent implements OnInit {
 
   initialiseForm(){
     this.resetForm = this.formbuilder.group({
-      email: ['', Validators.required]
+      email: ['', [Validators.required, Validators.email]]
+    })
+  }
+
+  resetPassword(formvalue){
+    console.log(formvalue.email)
+    this.authservice.resetPassword(formvalue.email).then(()=>{
+      this.passwordsent = true;
+    }, err=>{
+
     })
   }
 }

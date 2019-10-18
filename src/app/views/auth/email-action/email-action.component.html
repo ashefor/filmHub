@@ -1,0 +1,15 @@
+<div id="logreg-forms">
+                <form class="form-reset" [formGroup]="changePwdForm" (submit)="changePassword(changePwdForm.value)">
+                        <p class="text-center h3 mb-2 font-weight-normal"> Change your password </p>
+                        <input type="password" class="form-control mb-1" placeholder="paswword" formControlName="password">
+                        <input type="password" class="form-control mt-1" placeholder="enter password again" formControlName="confirmpassword">
+                        <button class="btn btn-primary btn-block" type="submit" [disabled]="changePwdForm.invalid">Reset Password</button>
+                        <hr>
+                        <div class="text-center">
+                            <span>
+                                Remember password? <a [routerLink]="['/auth/login']">Go back and Login</a>
+                            </span>
+                        </div>
+                    </form>
+        <br>
+    </div>

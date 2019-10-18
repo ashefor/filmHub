@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MoviesService } from 'src/app/services/movies.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { Subscription } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -20,7 +21,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   allMovies = [];
   testArr = []
   subsciption: Subscription
-  constructor(private movieservice: MoviesService, private authservice: AuthService) { }
+  constructor(private movieservice: MoviesService, 
+    private title: Title,
+    private authservice: AuthService) { 
+      this.title.setTitle('filmHub - Home')
+    }
 
   ngOnInit() {
     window.scrollTo(0,0)

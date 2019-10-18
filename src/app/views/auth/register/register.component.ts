@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,11 @@ export class RegisterComponent implements OnInit {
   loading: boolean = false;
   diffpasswords: boolean = false;
   psswd;
-  constructor(private formbuilder: FormBuilder, private authservice: AuthService) { }
+  constructor(private formbuilder: FormBuilder,
+    private title: Title, 
+    private authservice: AuthService) { 
+      this.title.setTitle('Register - filmHub')
+    }
 
   ngOnInit() {
     window.scrollTo(0,0)

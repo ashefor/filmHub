@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,11 @@ export class LoginComponent implements OnInit {
   loading: boolean = false;
   loginForm: FormGroup;
   checked: boolean = false;
-  constructor(private formbuilder: FormBuilder, private authservice: AuthService) { }
+  constructor(private formbuilder: FormBuilder, 
+    private title: Title,
+    private authservice: AuthService) { 
+      this.title.setTitle('Login - filmHub')
+    }
 
   ngOnInit() {
     window.scrollTo(0,0)

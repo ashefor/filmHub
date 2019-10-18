@@ -5,7 +5,8 @@ import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { VerifyEmailComponent } from './verify-email/verify-email.component'
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { EmailActionComponent } from './email-action/email-action.component'
 
 
 
@@ -13,7 +14,7 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component'
   declarations: [
     LoginComponent, 
     RegisterComponent, 
-    ResetPasswordComponent, VerifyEmailComponent],
+    ResetPasswordComponent, VerifyEmailComponent, EmailActionComponent],
   imports: [
     ReactiveFormsModule,
     CommonModule,
@@ -29,6 +30,9 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component'
       },
       {
         path: 'reset-password', component: ResetPasswordComponent
+      },
+      {
+        path: 'email/action', component: EmailActionComponent
       }
     ])
   ]

@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MoviesService } from 'src/app/services/movies.service';
 import { Observable, Subscription } from 'rxjs';
 import { faEye, faHeart } from '@fortawesome/free-solid-svg-icons';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-favorites',
@@ -18,7 +19,11 @@ export class FavoritesComponent implements OnInit, OnDestroy {
   loading: boolean = true;
   newFav: Observable<any>
   subscription: Subscription;
-  constructor(private authservice: AuthService, private movieservice: MoviesService) { }
+  constructor(private authservice: AuthService, 
+    private title: Title,
+    private movieservice: MoviesService) { 
+      this.title.setTitle('Favorites - filmHub')
+    }
 
   ngOnInit() {
     window.scrollTo(0,0)

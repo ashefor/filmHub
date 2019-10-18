@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable, BehaviorSubject, from } from 'rxjs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ToastrNotificationService } from './toastr-notification.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class AuthService {
   redirectUrl: string
   public currentUserSubject = new BehaviorSubject({})
   currentUser = this.currentUserSubject.asObservable()
-  constructor(private auth: AngularFireAuth, private router: Router) {
+  constructor(private auth: AngularFireAuth, private router: Router, private toastr: ToastrNotificationService) {
     this.currentUserSubject.next(JSON.parse(localStorage.getItem('user')))
     this.auth.authState.subscribe((user) => {
       if (user) {
@@ -40,8 +41,12 @@ export class AuthService {
           this.router.navigate(['/home'])
         })
       }
-    }).catch((err: HttpErrorResponse) => {
-      console.log(err.message)
+    }).catch((err: any) => {
+      if(err.code === "auth/too-many-requests"){
+        this.toastr.errorToaster('Too many unsuccessful attempts. Please try again later')
+        }
+        console.log(err.message)
+        this.toastr.errorToaster(err.message)
     })
   }
 
@@ -53,13 +58,17 @@ export class AuthService {
         this.currentUserSubject.next(JSON.parse(localStorage.getItem('user')))
         this.router.navigate(['/home'])
       }
-    }).catch((err) => {
+    }).catch((err:any)=>{
+      if(err.code === "auth/too-many-requests"){
+      this.toastr.errorToaster('Too many unsuccessful login attempts. Please try again later')
+      }
       console.log(err.message)
+      this.toastr.errorToaster(err.message)
     })
   }
 
   sendVerificationMail() {
-    this.auth.auth.currentUser.sendEmailVerification().then((data) => {
+    this.auth.auth.currentUser.sendEmailVerification().then(() => {
       this.router.navigate(['/auth/verify-email'])
     })
   }
@@ -68,7 +77,26 @@ export class AuthService {
     this.auth.auth.signOut()
     return this.router.navigate(['/auth/login'])
   }
-
+  resetPassword(email){
+    return this.auth.auth.sendPasswordResetEmail(email).then().catch((err:any)=>{
+      if(err.code === "auth/too-many-requests"){
+        this.toastr.errorToaster('Too many unsuccessful attempts. Please try again later')
+        }
+        console.log(err.message)
+        this.toastr.errorToaster(err.message)
+    })
+  }
+  confirmPasswordReset(code, password){
+    return this.auth.auth.confirmPasswordReset(code, password).then(()=>{
+      this.router.navigate(['/auth/login'])
+    }).catch((err:any)=>{
+      if(err.code === "auth/too-many-requests"){
+        this.toastr.errorToaster('Too many unsuccessful attempts. Please try again later')
+        }
+        console.log(err.message)
+        this.toastr.errorToaster(err.message)
+    })
+  }
   get isLoggedIn() {
     const user = JSON.parse(localStorage.getItem('user'));
     // return (user != null && user.emailVerified !== false) ? true: false;

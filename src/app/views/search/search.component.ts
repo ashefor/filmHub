@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { MoviesService } from 'src/app/services/movies.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-search',
@@ -21,7 +22,11 @@ export class SearchComponent implements OnInit, OnDestroy {
   hasFavorite: boolean = false;
   nomovie: boolean;
   result: any;
-  constructor(private route: ActivatedRoute, private authservice: AuthService, private movieservice: MoviesService) { }
+  constructor(private route: ActivatedRoute, 
+    private title: Title,
+    private authservice: AuthService, private movieservice: MoviesService) {
+      this.title.setTitle('Search - filmHub')
+     }
 
   ngOnInit() {
     window.scrollTo(0, 0)
@@ -34,11 +39,11 @@ export class SearchComponent implements OnInit, OnDestroy {
       if (loggeduser.uid) {
         this.route.queryParams.subscribe((data: Params) => {
           this.searchParam = data['s']
-          console.log(this.searchParam)
+          navbar.classList.remove('show')
           this.subscription = this.movieservice.searchForMovie(this.searchParam).subscribe((data: any) => {
             if (data) {
-              this.loading = false;
               console.log(data)
+              this.loading = false;
               if(data.Response === 'False'){
                 this.nomovie = true;
               this.result = data.Error;

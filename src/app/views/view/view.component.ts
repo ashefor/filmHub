@@ -3,7 +3,7 @@ import { MoviesService } from 'src/app/services/movies.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Subscription, Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
-import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
+import { SafeResourceUrl, DomSanitizer, Title } from '@angular/platform-browser';
 import { faSearch, faHeartbeat, faChevronCircleDown } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -25,8 +25,10 @@ export class ViewComponent implements OnInit, OnDestroy {
   newmov = []
   @ViewChild('target', {static:false}) scrooller: ElementRef<HTMLElement>
   public safeImg: SafeResourceUrl
-  constructor(private movieservice: MoviesService, private route: ActivatedRoute, private authservice: AuthService, private sanitizer: DomSanitizer) {
-      
+  constructor(private movieservice: MoviesService, 
+    private title: Title,
+    private route: ActivatedRoute, private authservice: AuthService, private sanitizer: DomSanitizer) {
+      this.title.setTitle('Movie Details - filmHub')
    }
 
   ngOnInit() {
