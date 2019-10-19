@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { ToastrNotificationService } from 'src/app/services/toastr-notification.service';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +17,8 @@ export class LoginComponent implements OnInit {
   checked: boolean = false;
   constructor(private formbuilder: FormBuilder, 
     private title: Title,
+    private router: Router,
+    private toastr: ToastrNotificationService,
     private authservice: AuthService) { 
       this.title.setTitle('Login - filmHub')
     }
@@ -37,7 +41,18 @@ export class LoginComponent implements OnInit {
   }
   login(formValues){
     console.log(formValues.email, formValues.password)
-    this.authservice.signIn(formValues.email, formValues.password)
+    this.loading = true;
+    this.authservice.signIn(formValues.email, formValues.password).then(() => {
+        this.router.navigate(['/home'])
+    }).catch((err:any)=>{
+      this.loading = false
+      if(err.code === "auth/too-many-requests"){
+      this.toastr.errorToaster('Too many unsuccessful login attempts. Please try again later')
+      }
+      console.log(err.message)
+      this.toastr.errorToaster(err.message)
+    })
+
   }
   keepLoggedIn(e) {
     this.checked = e.target.checked

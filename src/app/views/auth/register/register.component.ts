@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 import { Title } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { ToastrNotificationService } from 'src/app/services/toastr-notification.service';
 
 @Component({
   selector: 'app-register',
@@ -15,6 +17,8 @@ export class RegisterComponent implements OnInit {
   psswd;
   constructor(private formbuilder: FormBuilder,
     private title: Title, 
+    private router: Router,
+    private toastr: ToastrNotificationService,
     private authservice: AuthService) { 
       this.title.setTitle('Register - filmHub')
     }
@@ -42,7 +46,18 @@ export class RegisterComponent implements OnInit {
       const pwd1 = this.registerForm.get('password').value
       const pwd2 = this.registerForm.get('confirmPassword').value
       if (pwd1 === pwd2) {
-        this.authservice.signUp(formValues.username, formValues.email, formValues.password)
+        this.loading = true;
+        this.authservice.signUp(formValues.username, formValues.email, formValues.password).then(()=>{
+          this.router.navigate(['/home'])
+
+        }).catch((err: any) => {
+          this.loading = false
+          if(err.code === "auth/too-many-requests"){
+            this.toastr.errorToaster('Too many unsuccessful attempts. Please try again later')
+            }
+            console.log(err.message)
+            this.toastr.errorToaster(err.message)
+        })
       } else {
         this.diffpasswords = true;
         console.log('not match')

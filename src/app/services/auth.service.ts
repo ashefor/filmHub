@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   signUp(username, email, password) {
-    this.auth.auth.createUserWithEmailAndPassword(email, password).then((value) => {
+    return this.auth.auth.createUserWithEmailAndPassword(email, password).then((value) => {
       if (value) {
         return value.user.updateProfile({
           displayName: username
@@ -38,32 +38,18 @@ export class AuthService {
           localStorage.setItem('user', JSON.stringify(value.user));
           JSON.parse(localStorage.getItem('user'))
           this.currentUserSubject.next(JSON.parse(localStorage.getItem('user')))
-          this.router.navigate(['/home'])
         })
       }
-    }).catch((err: any) => {
-      if(err.code === "auth/too-many-requests"){
-        this.toastr.errorToaster('Too many unsuccessful attempts. Please try again later')
-        }
-        console.log(err.message)
-        this.toastr.errorToaster(err.message)
     })
   }
 
   signIn(email, password) {
-    this.auth.auth.signInWithEmailAndPassword(email, password).then((value) => {
+    return this.auth.auth.signInWithEmailAndPassword(email, password).then((value) => {
       if (value) {
         localStorage.setItem('user', JSON.stringify(value.user));
         JSON.parse(localStorage.getItem('user'))
         this.currentUserSubject.next(JSON.parse(localStorage.getItem('user')))
-        this.router.navigate(['/home'])
       }
-    }).catch((err:any)=>{
-      if(err.code === "auth/too-many-requests"){
-      this.toastr.errorToaster('Too many unsuccessful login attempts. Please try again later')
-      }
-      console.log(err.message)
-      this.toastr.errorToaster(err.message)
     })
   }
 
@@ -78,13 +64,7 @@ export class AuthService {
     return this.router.navigate(['/auth/login'])
   }
   resetPassword(email){
-    return this.auth.auth.sendPasswordResetEmail(email).then().catch((err:any)=>{
-      if(err.code === "auth/too-many-requests"){
-        this.toastr.errorToaster('Too many unsuccessful attempts. Please try again later')
-        }
-        console.log(err.message)
-        this.toastr.errorToaster(err.message)
-    })
+    return this.auth.auth.sendPasswordResetEmail(email).then()
   }
   confirmPasswordReset(code, password){
     return this.auth.auth.confirmPasswordReset(code, password).then(()=>{
