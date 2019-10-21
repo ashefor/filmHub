@@ -4,6 +4,10 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 The Firebase was used as a backend for users and users favorite movie(s)
 
+# Demo
+
+https://filmhub.netlify.com
+
 ![Repo Preview](sc1.png) ![Repo Preview](sc2.png) ![Repo Preview](sc3.png) ![Repo Preview](sc4.png)
 
 ## Development server
